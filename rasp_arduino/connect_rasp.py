@@ -29,16 +29,16 @@ while True:
     except:
         timestamp = datetime.now()
 
-    name = "JunYeong"
-    email = "wndwls1024@naver.com"
+    name = ""
+    email = ""
     sql = "INSERT INTO `Walkure_log`(`TYPE`, `JOINT`, `ANOMAL`, `TIMESTAMP`) VALUES (%s,%s,%s,%s)"
 
     now = datetime.now()
-    conn = pymysql.connect(host='mlpalab.synology.me',
-                        user='juny',
-                        password='Young@62482508',
-                        db='juny',
-                        port=3306,
+    conn = pymysql.connect(host='',
+                        user='',
+                        password='',
+                        db='',
+                        port=,
                         charset='utf8')
 
     with conn:
@@ -46,24 +46,3 @@ while True:
             cur.execute(sql, (type, str(';'.join([str(j) for j in joint])), anomal, timestamp))
             conn.commit()
  
-
-# while(True):
-#     try:
-#         received_data = read_json()
-
-#         conn = pymysql.connect(host='mlpalab.synology.me',
-#                                user='juny'
-#                                password='Young@62482508',
-#                                db='juny',
-#                                port='3306'
-#                                charset='utf8')
-        
-#         sql = "INSERT INTO user (name, email) VALUES (%s, %s)"
-
-#         with conn:
-#             with conn.cursor() as cur:
-#                 cur.execute(sql)
-
-#         print(received_data)
-#     except:
-#         continue

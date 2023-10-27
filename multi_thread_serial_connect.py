@@ -208,9 +208,10 @@ def classification_thread(output_queue, lidar_queue, video_queue, face_queue):
             print('len anomalies', len(anomalies))
         
 
-            if anomal_ratio > 0.8:
+            if anomal_ratio > 0.8:                        # Stranger
                 try:
                     name = face_queue.get_nowait()
+                        
                 except queue.Empty:
                     print("========== FACE QUEUE IS EMPTY ===========")
                     return
@@ -237,10 +238,14 @@ def classification_thread(output_queue, lidar_queue, video_queue, face_queue):
                         'anomal': anomal_ratio,
                         # 'timestamp': datetime.now()
                         }
+                if len(name) == 0:                        # 2차인증 (얼굴인식)
+                        print("Pass 1st Authentication but Cannot Pass 2nd authentication. Keep the Door Locked.")
+                        print(f'anomal_ratio : {anomal_ratio}')
+                else:
+                        print(f'---------Welcome {name} ------------------Welcome {name}------------------Welcome {name}---------')
+                        print(f'anomal_ratio : {anomal_ratio}')
 
-                print(f'---------Welcome {name} ------------------Welcome {name}------------------Welcome {name}---------')
-
-                print(f'anomal_ratio : {anomal_ratio}')
+                # print(f'anomal_ratio : {anomal_ratio}')
 
                 py_serial.write("a".encode('utf-8'))
                 log_json = json.dumps(log)
